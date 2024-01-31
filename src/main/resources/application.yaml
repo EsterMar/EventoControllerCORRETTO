@@ -1,0 +1,65 @@
+spring:
+  security:
+    oauth2:
+       resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/SpringBootKeycloak
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+       client:
+         registration:
+           keycloak:
+             client-id: dbd2c671-7af8-4e15-86eb-ccf85f9d4f22
+             client-secret: nkXRFIQhmshGH5qZKsveJ2oRURDQNaAm
+             scope: openid
+             authorization-grant-type: clients_credentials
+
+         provider:
+           keycloak:
+             authorization-uri: http://localhost:8080/realms/SpringBootKeycloak/protocol/openid-connect/auth
+             token-uri: http://localhost:8080/realms/SpringBootKeycloak/protocol/openid-connect/token
+             user-info-uri: http://localhost:8080/realms/SpringBootKeycloak/protocol/openid-connect/userinfo
+             jwk-set-uri: http://localhost:8080/realms/SpringBootKeycloak/protocol/openid-connect/certs
+
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/events
+    username: postgres
+    password: cROCARINAPAH2!
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+   # hibernate:
+    #  ddl-auto: create
+    properties:
+      hibernate:
+        default_schema: theatre
+        ddl-auto: update
+
+  logging:
+    config: classpath:logback-spring.xml
+    file:
+      path: /dataSources/${spring.application.name}
+    level.web:
+      org.springframework: trace
+
+server:
+  port: 8081
+
+jwt:
+  auth:
+    converter:
+      resource-id: SpringBootKeycloak
+      principle-attribute: preferred_username
+
+
+
+
+
+
+
+
+
+
+
+
