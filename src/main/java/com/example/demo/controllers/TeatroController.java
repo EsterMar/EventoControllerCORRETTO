@@ -21,7 +21,7 @@ public class TeatroController {
     @Autowired
     private TeatroService teatroService;
 
-    @GetMapping("/{spettacolo}")
+    @GetMapping("/spettacolo")
     public ResponseEntity getTheater(@RequestBody @Valid Spettacolo spettacolo) {
         try {
             List<Teatro> theaters = teatroService.getTheatres(spettacolo);
