@@ -18,9 +18,8 @@ public interface SpettacoloRepository extends JpaRepository<Spettacolo, Integer>
     List<Spettacolo> findByGenre(String genre);
     List<Spettacolo> findAll();
 
-    @Query("SELECT s FROM Spettacolo s WHERE s.first_day > :firstDay")
-    List<Spettacolo> findByFirstDayAfter(Date firstDay); //trovo gli spettacoli che vi sono dopo quella data
-
+    @Query("SELECT s FROM Spettacolo s WHERE s.first_day <= :firstDay and :firstDay<=s.last_day")
+    List<Spettacolo> findByFirstDayAfter(Date firstDay); //trovo gli spettacoli che vi sono dopo quella data (data compresa)
 
 
 

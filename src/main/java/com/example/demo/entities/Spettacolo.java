@@ -21,7 +21,6 @@ public class Spettacolo {
     @Column(name = "id", nullable = false)
     private int id;
 
-
     @Basic
     @Column (name = "title", nullable = true, length = 50)
     private String title;

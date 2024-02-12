@@ -36,4 +36,5 @@ public class Sala {
     @OneToMany(mappedBy = "sala", cascade= CascadeType.MERGE)
     @JsonIgnore
     private List<Posto> seats;
+
 }

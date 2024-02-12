@@ -42,7 +42,7 @@ public class SpettacoloController {
     }
 
     @GetMapping("/{startDate}")
-    public List<Spettacolo> getSpectaclesAfterDate(@Valid @PathVariable ("startDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date start){
+    public List<Spettacolo> getSpectaclesAfterDate(@Valid @PathVariable ("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date start){
         return spettacoloRepository.findByFirstDayAfter(start);
     }
 

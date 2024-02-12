@@ -18,5 +18,5 @@ public interface PostoRepository extends JpaRepository<Posto, Integer> {
 
     //@Query(" SELECT COUNT(p) FROM Posto p WHERE p.available = false and p.sala = ?1 ")
     @Query("SELECT COUNT(p) FROM Sala s JOIN s.seats p WHERE s.room_number = ?1 and p.available = false")
-    int countOccupiedSeats(Sala id_sala); //conta il numero di posti occupati nella sala specificata. Da passare in SalaRepository?
+    int countOccupiedSeats(Integer sala); //conta il numero di posti occupati nella sala specificata. Da passare in SalaRepository?
 }
