@@ -25,7 +25,7 @@ public class BigliettoService {
 
     @Transactional(readOnly = true)
     public float totalPrice(Cliente id_cliente) throws ClientDoesNotExistException {
-        if(!clienteRepository.existsByEmail(id_cliente.getEmail()))
+        if( !clienteRepository.existsByEmail(id_cliente.getEmail()) || !clienteRepository.existsById(id_cliente.getId()))
             throw new ClientDoesNotExistException();
         return bigliettoRepository.sumTheTotalPriceForClient(id_cliente);
     }

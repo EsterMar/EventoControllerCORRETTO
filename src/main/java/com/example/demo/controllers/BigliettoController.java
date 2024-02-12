@@ -40,7 +40,6 @@ public class BigliettoController {
         } catch (TheEventIsSoldOutException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The  event" +pat.getEvento()+"is sold out. There aren't free seats.", e);
         }
-
     }
 
     @GetMapping("/price")
@@ -53,9 +52,8 @@ public class BigliettoController {
     }
 
     @GetMapping("/tickets/{date}")
-    public int getTicketsInData(@RequestParam ("date") @DateTimeFormat(pattern= "DD-MM-YYYY") Date date){
+    public int getTicketsInData(@Valid @PathVariable ("date") @DateTimeFormat(pattern= "yyyy-MM-dd") Date date){
         return bigliettoRepository.countInDate(date);
-
     }
 
 }

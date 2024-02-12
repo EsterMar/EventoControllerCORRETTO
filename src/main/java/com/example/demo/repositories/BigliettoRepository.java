@@ -24,7 +24,7 @@ public interface BigliettoRepository extends JpaRepository<Biglietto, Integer> {
     float sumTheTotalPriceForClient(Cliente id_cliente);
 
     @Query("SELECT COUNT(b) FROM Biglietto b JOIN b.evento e WHERE e.data = ?1")
-    int countInDate(Date date1); //conto quanti biglietti ho venduto in quel giorno
+    int countInDate(Date date); //conto quanti biglietti ho venduto in quel giorno
 
     @Query("SELECT COUNT(b) FROM Biglietto b WHERE b.evento = ?1")
     int countByEvento (Evento id_evento); //conto quanti biglietti ho venduto in quell'evento
