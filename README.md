@@ -7,3 +7,4 @@ La classe PostoController funziona.
 BIglietto funziona, bisogna solo controrllare la POST request. 
 La check funziona, capire meglio il funzionamento della logged. Al momento mi dà forbidden e dovrebbe essere questo il comportamento corretto. 
 Stessa cosa vale per la classe HomeController con il "Forbidden".
+TUTTO GIUSTO. DA RICONTROLLARE O ELIMINARE IL METODO DELETETICKETS E CAPIRE COME FUNZIONANO I RUOLI DI KEAYCLOAK PER FAR FUNZIONARE I CONTROLLER CHECK E HOME.
