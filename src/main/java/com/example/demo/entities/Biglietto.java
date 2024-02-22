@@ -33,4 +33,15 @@ public class Biglietto {
     @OneToOne
     @JoinColumn(name= "posto")
     private Posto posto;
+
+    @Override
+    public String toString() {
+        return "Biglietto{" +
+                "id=" + id +
+                ", price=" + price +
+                ", cliente=" + (cliente != null ? cliente.getId() : null) +
+                ", evento=" + (evento != null ? evento.getId() : null) +
+                ", posto=" + (posto != null ? posto.getId() : null) +
+                '}';
+    }
 }

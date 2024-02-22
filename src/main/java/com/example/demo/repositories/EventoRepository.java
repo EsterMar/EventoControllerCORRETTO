@@ -1,6 +1,7 @@
 package com.example.demo.repositories;
 
 import com.example.demo.entities.Evento;
+import com.example.demo.entities.Posto;
 import com.example.demo.entities.Spettacolo;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,9 @@ public interface EventoRepository extends JpaRepository<Evento,Integer> {
     List<Evento> findByData (Date data);
 
     List<Evento> findAllBySpettacolo(Spettacolo id_spettacolo);
+
+    List<Evento> findAllByPosto(Posto posto);
+    Evento findAllById(int evento);
 
     @Query("SELECT e from Evento e where e.data > ?1 and e.data < ?2")
     List<Evento> findByDataBetween (Date first_Day, Date last_Day);

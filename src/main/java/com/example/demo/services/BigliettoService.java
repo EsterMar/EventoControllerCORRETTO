@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.demo.exceptions.ClientDoesNotExistException;
 import com.example.demo.exceptions.TheSeatIsNotAvailableException;
 import com.example.demo.entities.Biglietto;
@@ -10,8 +11,13 @@ import com.example.demo.repositories.BigliettoRepository;
 import com.example.demo.repositories.ClienteRepository;
 import com.example.demo.repositories.PostoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BigliettoService {
@@ -30,18 +36,37 @@ public class BigliettoService {
         return bigliettoRepository.sumTheTotalPriceForClient(id_cliente);
     }
 
+    @Transactional(readOnly = true)
+    public Biglietto showAllSeatsById(int id_biglietto){
+        return bigliettoRepository.findById(id_biglietto);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Biglietto> showAllBySeats(Posto id_posto){
+        return bigliettoRepository.findByPosto(id_posto);
+    }
+
+
     @Transactional(readOnly = false)
-    public Biglietto chooseSeat(Cliente id_cliente, Posto selected_seat, Evento id_evento) throws TheSeatIsNotAvailableException {
+    public List<Biglietto> deleteTicketsByCliente(Cliente id_cliente){
+        List<Biglietto> deletedTickets = bigliettoRepository.findByCliente(id_cliente);
+       for (Biglietto ticket : deletedTickets) {
+            bigliettoRepository.delete(ticket);
+        }
+        return deletedTickets;
+    }
+
+    @Transactional(readOnly = false)
+    public Biglietto chooseSeat(Cliente id_cliente, Posto selected_seat, Evento id_evento, float price) throws TheSeatIsNotAvailableException {
         if(!selected_seat.isAvailable())
             throw new TheSeatIsNotAvailableException();
-
-
 
         //creo il nuovo biglietto
         Biglietto ticket= new Biglietto();
         ticket.setEvento(id_evento);
         ticket.setCliente(id_cliente);
         ticket.setPosto(selected_seat);
+        ticket.setPrice(price);
 
         //salvo il biglietto
         ticket= bigliettoRepository.save(ticket);

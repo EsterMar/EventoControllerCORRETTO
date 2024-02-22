@@ -45,4 +45,13 @@ public class Evento {
     @JsonIgnore
     private Spettacolo spettacolo;
 
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "id=" + id +
+                ", hours='" + hours + '\'' +
+                ", data=" + data +
+                ", posto=" + (posto != null ? posto.getId() : null) +
+                '}';
+    }
 }
